@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
    document.body.innerHTML = `
+   <div class="wrapper">
       <section class="info">
             <p>Клавиатура создавалась на WIndows 10</p>
             <p>Комбинация для перключения языка Shift + ALt</p>
@@ -12,8 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <section class="keyboard"> 
       </section>  
-
-      
+   </div>
 `
 
    const textPlace = document.querySelector('.text__place');
@@ -21,19 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
    const [enKeyBoardSimbols, ruKeyBoardSimbols] = [
       [
-         [96, 126,],
-         [49, 33],
-         [50, 64],
-         [51, 35],
-         [52, 36],
-         [53, 37],
-         [54, 94],
-         [55, 38],
-         [56, 42],
-         [57, 40],
-         [48, 41],
-         [45, 95],
-         [61, 43],
+         [96, 126, 'noCaps'],
+         [49, 33, 'noCaps'],
+         [50, 64, 'noCaps'],
+         [51, 35, 'noCaps'],
+         [52, 36, 'noCaps'],
+         [53, 37, 'noCaps'],
+         [54, 94, 'noCaps'],
+         [55, 38, 'noCaps'],
+         [56, 42, 'noCaps'],
+         [57, 40, 'noCaps'],
+         [48, 41, 'noCaps'],
+         [45, 95, 'noCaps'],
+         [61, 43, 'noCaps'],
          {
             'code': 'Backspace',
             'name': 'Back Spase',
@@ -159,19 +159,19 @@ document.addEventListener('DOMContentLoaded', () => {
          },
       ],
       [
-         [1105, 1025],
-         [49, 33],
-         [50, 34],
-         [51, 8470],
-         [52, 59],
-         [53, 37],
-         [54, 58],
-         [55, 63],
-         [56, 42],
-         [57, 40],
-         [48, 41],
-         [45, 95],
-         [61, 43],
+         [1105, 1025, 'noCaps'],
+         [49, 33, 'noCaps'],
+         [50, 34, 'noCaps'],
+         [51, 8470, 'noCaps'],
+         [52, 59, 'noCaps'],
+         [53, 37, 'noCaps'],
+         [54, 58, 'noCaps'],
+         [55, 63, 'noCaps'],
+         [56, 42, 'noCaps'],
+         [57, 40, 'noCaps'],
+         [48, 41, 'noCaps'],
+         [45, 95, 'noCaps'],
+         [61, 43, 'noCaps'],
          {
             'code': 'Backspace',
             'name': 'Back Spase',
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (const item of language) {
          if (Array.isArray(item)) {
             keyboardBlock.innerHTML += `
-         <div class="keyboard__key" data-key ="${item[0]}" data-keyShift ="${item[1]}">
+         <div class="keyboard__key${item[2] ? " " + item[2] : ''}" data-key ="${item[0]}" data-keyShift ="${item[1]}">
             <div class="keyboard__shift">${String.fromCharCode(item[1])}</div>
             <div class="keyboard__unShift">${String.fromCharCode(item[0])}</div>
             
@@ -358,7 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
    })
 
    document.addEventListener('keydown', (e) => {
-      console.log(e.code);
       textPlace.focus()
       if (e.shiftKey && e.altKey) {
          if (hoyLanguage == 'en') {
@@ -497,11 +496,9 @@ document.addEventListener('DOMContentLoaded', () => {
          } else {
             keyClick = e.target.getAttribute('data-key');
          }
+
          if (!(keyClick == 'CapsLock')) e.target.classList.add('active');
-         keyboardBlock.classList.remove('shift')
-         const allShifts = document.querySelectorAll('.Shift').forEach(e => {
-            e.classList.remove('active')
-         });
+      
          if (keyClick == 'Space') {
             const placeCursor = getCursorPosition(textPlace);
             textPlace.value = (textPlace.value).slice(0, placeCursor) + ' ' + (textPlace.value).slice(placeCursor,);
@@ -534,7 +531,10 @@ document.addEventListener('DOMContentLoaded', () => {
          else if (e.target.classList.contains('Shift')) {
             keyboardBlock.classList.add('shift')
             document.querySelector(`.keyboard__key[data-key="${keyClick}"]`).classList.add('active');
-            return
+            if (keyboardBlock.classList.contains('shift') && keyboardBlock.classList.contains('capslock')) {
+               keyboardBlock.classList.add('shift-caps')
+            }
+            
          }
          else if (keyClick == 'ArrowUp') {
             const placeCursor = getCursorPosition(textPlace);
@@ -561,8 +561,11 @@ document.addEventListener('DOMContentLoaded', () => {
             textPlace.value = (textPlace.value).slice(0, placeCursor) + String.fromCharCode(keyClick) + (textPlace.value).slice(placeCursor);
             textPlace.setSelectionRange(placeCursor + 1, placeCursor + 1);
          }
+
          setTimeout(() => {
             e.target.classList.remove('active');
+            keyboardBlock.classList.remove('shift');
+            keyboardBlock.classList.remove('shift-caps')
          }, 200)
       }
    })

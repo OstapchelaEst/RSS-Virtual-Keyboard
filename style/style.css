@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
 * {
   padding: 0px;
   margin: 0px;
@@ -38,7 +39,8 @@ body ._lock {
 
 body {
   line-height: 1;
-  font-family: 'Poppins';
+  font-family: 'Roboto';
+  background-color: #FEFFDE;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -118,20 +120,24 @@ h6 {
           flex: 1 1 auto;
 }
 
+.wrapper {
+  padding: 0 10px 50px 10px;
+}
+
 .keyboard {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  max-width: 760px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 770px;
   margin: 0 auto;
-  background-color: gainsboro;
-  border-radius: 4px;
-  padding: 5px;
+  background-color: #91C788;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .text {
@@ -145,13 +151,15 @@ h6 {
 }
 
 .text textarea {
+  font-family: 'Roboto';
+  font-size: 20px;
   resize: vertical;
-  max-width: 750px;
+  max-width: 770px;
   min-height: 300px;
   width: 100%;
-  border: 2px solid yellowgreen;
+  border: 2px solid #52734D;
+  background-color: rgba(221, 255, 188, 0.219);
   padding: 15px;
-  font-family: 'Poppins';
 }
 
 .keyboard__key {
@@ -169,7 +177,8 @@ h6 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 2px solid yellowgreen;
+  border: 2px solid #52734D;
+  border-bottom: 5px solid #52734D;
   border-radius: 3px;
   -webkit-transition: all 0.15s ease 0s;
   -o-transition: all 0.15s ease 0s;
@@ -204,12 +213,24 @@ h6 {
   opacity: 1;
 }
 
+.shift .noCaps .keyboard__shift {
+  opacity: 1;
+}
+
 .capslock .keyboard__shift {
   opacity: 1;
 }
 
+.capslock .noCaps .keyboard__shift {
+  opacity: 0;
+}
+
 .shift-caps .keyboard__shift {
   opacity: 0;
+}
+
+.shift-caps .noCaps .keyboard__shift {
+  opacity: 1;
 }
 
 .keyboard__button {
@@ -238,8 +259,16 @@ h6 {
   opacity: 0;
 }
 
+.capslock .noCaps .keyboard__unShift {
+  opacity: 1;
+}
+
 .shift-caps .keyboard__unShift {
   opacity: 1;
+}
+
+.shift-caps .noCaps .keyboard__unShift {
+  opacity: 0;
 }
 
 .two {
@@ -255,15 +284,15 @@ h6 {
 }
 
 .active {
-  background-color: lawngreen;
+  background-color: #52734D;
   -webkit-transform: scale(0.95);
       -ms-transform: scale(0.95);
           transform: scale(0.95);
+  border-bottom: 2px solid #52734D;
 }
 
 .info {
   margin: 40px 0px;
-  padding-bottom: 40px;
 }
 
 .info p {
