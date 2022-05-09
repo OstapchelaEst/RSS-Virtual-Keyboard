@@ -1,0 +1,247 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+* {
+   padding: 0px;
+   margin: 0px;
+   border: 0px;
+}
+*,
+*:before,
+*:after {
+   box-sizing: border-box;
+}
+:focus,
+:active {
+   outline: none;
+}
+a:focus,
+a:active {
+   outline: none;
+}
+html,
+body {
+   height: 100%;
+   & ._lock {
+      overflow: hidden;
+   }
+}
+p{
+}
+
+._lock {
+   overflow: hidden;
+}
+
+body {
+   line-height: 1;
+   font-family: 'Roboto';
+   background-color: #FEFFDE;
+   -ms-text-size-adjust: 100%;
+   -moz-text-size-adjust: 100%;
+   -webkit-text-size-adjust: 100%;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+input,
+button,
+textarea {
+   font-size: inherit;
+}
+button {
+   cursor: pointer;
+   color: inherit;
+   background-color: inherit;
+}
+a {
+   color: inherit;
+}
+a:link,
+a:visited {
+   text-decoration: none;
+}
+a:hover {
+   text-decoration: none;
+}
+ul li {
+   list-style: none;
+}
+img {
+   vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-weight: inherit;
+   font-size: inherit;
+}
+
+//====================================================================================================
+
+//====================================================================================================
+
+[class*="__container"] {
+   box-sizing: content-box;
+   margin: 0 auto;
+   max-width: 1200px;
+   padding: 0 30px;
+}
+.wrapper {
+   min-height: 100%;
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+   transition: all 0.3s ease 0s;
+   > main {
+      flex: 1 1 auto;
+   }
+}
+//=================================================================================================
+
+
+$maxWidth: 1280; //ширина макета
+
+@function adaptiv-value-siz($pcSize, $mobSize, $size, $maxWidth, $minWidth) {
+   $addSize: $pcSize - $mobSize;
+   $maxWidth: $maxWidth - $minWidth;
+   $value: calc(#{$mobSize + $size} + #{$addSize} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+   @return $value;
+}
+@function rem($size){
+   @return $size/ 16 + rem;
+}
+//====================================================================================
+.wrapper{
+   padding:0 10px 50px 10px;
+}
+.keyboard{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+
+   max-width: 770px;
+   margin: 0 auto;
+
+   background-color:#91C788;
+   border-radius: 10px;
+   padding: 10px;
+}
+.text{
+   display: flex;
+   justify-content: center;
+   margin-bottom: 30px;
+   textarea{   
+      font-family: 'Roboto';
+      font-size: 20px;
+      resize: vertical;
+      max-width: 770px;
+      min-height: 300px;
+      width: 100%;
+      border: 2px solid #52734D;
+      background-color: rgba(221, 255, 188, 0.219);
+      padding: 15px;
+   }
+}
+.keyboard__key{
+   cursor: pointer;
+   width: 40px;
+   height: 40px;
+   padding: 5px;
+   margin: 5px;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   border: 2px solid #52734D;
+   border-bottom:5px solid #52734D ;
+   border-radius: 3px;
+   transition: all 0.15s ease 0s;
+
+   position: relative;
+   z-index: 2;
+
+
+
+   @media (any-hover: hover){
+      &:hover{
+         transform: scale(0.95);
+      }
+   }
+}
+.keyboard__shift{
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+
+   pointer-events: none;
+   transition: all 0.3s ease 0s;
+   opacity: 0;
+   .shift & {
+      opacity: 1;
+   }
+   .shift .noCaps & {
+      opacity: 1;
+   }
+   .capslock  & {
+      opacity: 1;
+   }
+   .capslock .noCaps & {
+      opacity: 0;
+   }
+   .shift-caps & {
+      opacity: 0;
+   }
+   .shift-caps .noCaps & {
+      opacity: 1;
+   }
+}
+.keyboard__button{
+   pointer-events: none;
+}
+.keyboard__unShift{
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   pointer-events: none;
+   opacity: 1;
+   transition: all 0.3s ease 0s;
+   .shift & {
+      opacity: 0;
+   }
+   .capslock & {
+      opacity: 0;
+   }
+   .capslock .noCaps & {
+      opacity: 1;
+   }
+   .shift-caps & {
+      opacity: 1;
+   }
+   .shift-caps .noCaps & {
+      opacity: 0;
+   }
+}
+.two{
+   width: 80px;
+}
+.space{
+   max-width: 100%;
+   flex: 1 1;
+   text-align: center;
+}
+.active{
+   background-color: #52734D;
+   transform: scale(0.95);
+   border-bottom:2px solid #52734D;
+}
+.info{
+   margin: 40px 0px;
+   & p {
+      text-align: center;
+   }
+}
