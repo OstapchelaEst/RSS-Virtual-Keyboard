@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
          [1079, 1047],
          [1093, 1061],
          [1098, 1066],
-         [92, 47],
+         [92, 47, "noCaps"],
          {
             "code": "Delete",
             "name": "Del",
